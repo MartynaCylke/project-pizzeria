@@ -81,6 +81,7 @@ renderInMenu(){
     thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
     thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
     thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
+    thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
   }
 }
   initAccordion(){
@@ -206,13 +207,12 @@ renderInMenu(){
 
     /* add new property "priceSingle" to thisProduct */
     thisProduct.priceSingle = price;
+    thisProduct.priceElem.innerHTML = price;
     thisProduct.price = price;
 
     /* update calculated price in the HTML */
     thisProduct.dom.priceElem.innerHTML = price;
   }
-
-
 
 
   /*generate HTML based on Template */
