@@ -62,11 +62,28 @@
        thisProduct. data = data;
       
       thisProduct.renderInMenu();
-
-      console.log('new Product:', thisProduct);
+      thisProduct.getElements();
+      thisProduct.initAccordion();
     }
 
-    initAccordion(){
+    renderInMenu() {
+      const thisProduct = this;
+  
+      /*generate HTML based on template */
+      const generateHTML = templates.menuProduct(thisProduct.data);
+  
+      /*create element using utils.createElementFromHTML */
+      thisProduct.element = utils.createDOMFromHTML(generateHTML);
+  
+      /*find menu container */
+       const menuContainer = document.querySelector(select.containerOf.menu);
+  
+       /*add element to menu */
+       menuContainer.appendChild(thisProduct.element)
+    }
+  }
+  
+    initAccordion() {
       const thisProduct = this;
   
       /* find the clickable trigger (the element that should react to clicking) */
@@ -91,31 +108,41 @@
     }
   }
 
-  renderInMenu() 
+  getElements() {
     const thisProduct = this;
 
-    /*generate HTML based on template */
-    const generateHTML = templates.menuProduct(thisProduct.data);
+    thisProduct.dom = {};
 
-    /*create element using utils.createElementFromHTML */
-    thisProduct.element = utils.createDOMFromHTML(generateHTML);
-
-    /*find menu container */
-const menuContainer = document.querySelector(select.containerOf.menu);
-
-/*add element to menu */
-menuContainer.appendChild(thisProduct.element)
-
-
-  init: function() {
-    const thisApp = this;
-    console.log("*** App starting ***");
-    console.log("thisApp:", thisApp);
-    console.log("classNames:", classNames);
-    console.log("settings:", settings);
-    console.log("templates:", templates);
-
-    thisApp.initData();
-    thisApp.initMenu();
+    thisProduct.dom.accordionTrigger = thisProduct.element.querySelector(
+      select.menuProduct.clickable
+    );
   }
-  };
+
+  const app = {
+    initData: function () {
+      const thisApp = this;
+      thisApp.data = dataSource;
+    },
+    initMenu: function () {
+      const thisApp = this;
+      console.log('thisApp.data:', thisApp.data);
+      for (let productData in thisApp.data.products) {
+        new Product(productData, thisApp.data.products[productData]);
+      }
+    },
+    
+    init: function () {
+      const thisApp = this;
+      console.log('*** App starting ***');
+      console.log('thisApp:', thisApp);
+      console.log('classNames:', classNames);
+      console.log('settings:', settings);
+      console.log('templates:', templates);
+
+      thisApp.initData();
+      thisApp.initMenu();
+      thisApp.initCart();
+  },
+};
+
+app.init();
