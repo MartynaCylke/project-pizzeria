@@ -58,64 +58,57 @@
     constructor(id, data) {
       const thisProduct = this;
 
-       thisProduct.id = id;
-       thisProduct. data = data;
-      
+      thisProduct.id = id;
+      thisProduct.data = data;
+
       thisProduct.renderInMenu();
-
-      console.log('new Product:', thisProduct);
+      thisProduct.getElements();
+      thisProduct.initAccordion();
     }
 
-    initAccordion(){
+    renderInMenu() {
       const thisProduct = this;
-  
-      /* find the clickable trigger (the element that should react to clicking) */
-      const clickableTrigger = thisProduct.element.querySelector(select.menuProduct.clickable)
-  
-      /* START: add event listener to clickable trigger on event click */
-      clickableTrigger.addEventListener('click', function(event) {
-        /* prevent default action for event */
-        event.preventDefault();
-        /* find active product (product that has active class) */
-        const activeProducts = document.querySelectorAll(select.all.menuProductsActive);
-         
-        /* if there is active product and it's not thisProduct.element, remove class active from it */
-        if(activeProduct !== thisProduct.element){
-          activeProduct.classList.remove(classNames.menuProduct.wrapperActive);
-        }
-        /* toggle active class on thisProduct.element */
-        thisProduct.element.classList.toggle(classNames.menuProduct.wrapperActive);
-        
-      });
-  
+
+      /*generate HTML based on template */
+      const generateHTML = templates.menuProduct(thisProduct.data);
+
+      /*create element using utils.createElementFromHTML */
+      thisProduct.element = utils.createDOMFromHTML(generateHTML);
+
+      /*find menu container */
+      const menuContainer = document.querySelector(select.containerOf.menu);
+
+      /*add element to menu */
+      menuContainer.appendChild(thisProduct.element);
     }
   }
 
-  renderInMenu() 
-    const thisProduct = this;
+  const app = {
+    initData: function () {
+      const thisApp = this;
+      thisApp.data = dataSource;
+    },
+    initMenu: function () {
+      const thisApp = this;
+      console.log("thisApp.data:", thisApp.data);
+      for (let productData in thisApp.data.products) {
+        new Product(productData, thisApp.data.products[productData]);
+      }
+    },
 
-    /*generate HTML based on template */
-    const generateHTML = templates.menuProduct(thisProduct.data);
+    init: function () {
+      const thisApp = this;
+      console.log("*** App starting ***");
+      console.log("thisApp:", thisApp);
+      console.log("classNames:", classNames);
+      console.log("settings:", settings);
+      console.log("templates:", templates);
 
-    /*create element using utils.createElementFromHTML */
-    thisProduct.element = utils.createDOMFromHTML(generateHTML);
-
-    /*find menu container */
-const menuContainer = document.querySelector(select.containerOf.menu);
-
-/*add element to menu */
-menuContainer.appendChild(thisProduct.element)
-
-
-  init: function() {
-    const thisApp = this;
-    console.log("*** App starting ***");
-    console.log("thisApp:", thisApp);
-    console.log("classNames:", classNames);
-    console.log("settings:", settings);
-    console.log("templates:", templates);
-
-    thisApp.initData();
-    thisApp.initMenu();
-  }
+      thisApp.initData();
+      thisApp.initMenu();
+      thisApp.initCart();
+    },
   };
+
+  app.init();
+}
