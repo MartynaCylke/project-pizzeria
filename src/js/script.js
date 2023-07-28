@@ -189,6 +189,7 @@
             }
           }
         }
+        thisProduct.dom.priceElem.innerHTML = price;
       }
       // update calculated price in the HTML
       thisProduct.priceElem.innerHTML = price;
