@@ -274,7 +274,9 @@
       thisWidget.linkDecrease.addEventListener("click", function (event) {
         event.preventDefault();
         // Add a check to prevent the value from going below zero
-        thisWidget.setValue(thisWidget.value - 1);
+        if (thisWidget.value > 0) {
+          thisWidget.setValue(thisWidget.value - 1);
+        }
       });
       thisWidget.linkIncrease.addEventListener("click", function (event) {
         event.preventDefault();
