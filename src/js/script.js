@@ -1,5 +1,4 @@
 /* global Handlebars, utils, dataSource */ // eslint-disable-line no-unused-vars
-
 {
   ("use strict");
 
@@ -404,9 +403,6 @@
         thisCart.update();
       });
 
-      thisCart.dom.productList.addEventListener("remove", function (event) {
-        thisCart.remove(event.detail.cartProduct);
-      });
     }
 
     add(menuProduct) {
@@ -536,6 +532,3 @@
       thisApp.initCart();
     },
   };
-
-  app.init();
-}
