@@ -1,5 +1,7 @@
 /* global Handlebars, dataSource */
+
 export const utils = {}; // eslint-disable-line no-unused-vars
+
 utils.createDOMFromHTML = function (htmlString) {
   let div = document.createElement("div");
   div.innerHTML = htmlString.trim();
@@ -10,6 +12,7 @@ utils.createPropIfUndefined = function (obj, key, value = []) {
     obj[key] = value;
   }
 };
+
 utils.serializeFormToObject = function (form) {
   let output = {};
   if (typeof form == "object" && form.nodeName == "FORM") {
