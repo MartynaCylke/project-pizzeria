@@ -3,7 +3,11 @@ import Product from "./components/Product.js";
 import Cart from "./components/Cart.js";
 import Booking from "./components/Booking.js";
 
-export const app = {
+const app = {
+  initBooking: function () {
+    const container = document.querySelector(select.containerOf.booking);
+    new Booking(container);
+  },
   initPages: function () {
     const thisApp = this;
 
@@ -81,13 +85,6 @@ export const app = {
       app.cart.add(event.detail.product.prepareCartProduct());
     });
   },
-
-  initBooking: function () {
-    const thisApp = this;
-    const bookingContainer = document.querySelector(select.containerOf.booking);
-    thisApp.initBooking = new Booking(bookingContainer);
-  },
-
   init: function () {
     const thisApp = this;
     // console.log('*** App starting ***');
