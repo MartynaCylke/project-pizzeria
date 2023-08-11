@@ -84,6 +84,7 @@
       /*add element to menu */
       menuContainer.appendChild(thisProduct.element);
     }
+<<<<<<< HEAD
     getElements() {
       const thisProduct = this;
 
@@ -103,6 +104,27 @@
           select.all.formInputs
         ),
       };
+=======
+
+    getElements() {
+      const thisProduct = this;
+
+      thisProduct.accordionTrigger = thisProduct.element.querySelector(
+        select.menuProduct.clickable
+      );
+      thisProduct.form = thisProduct.element.querySelector(
+        select.menuProduct.form
+      );
+      thisProduct.formInputs = thisProduct.form.querySelectorAll(
+        select.all.formInputs
+      );
+      thisProduct.cartButton = thisProduct.element.querySelector(
+        select.menuProduct.cartButton
+      );
+      thisProduct.priceElem = thisProduct.element.querySelector(
+        select.menuProduct.priceElem
+      );
+>>>>>>> 38b9abafa9077b957d6a01c1eff8629a048421a5
     }
 
     initAccordion() {
@@ -132,25 +154,41 @@
 
     initOrderForm() {
       const thisProduct = this;
+<<<<<<< HEAD
       //console.log(this.initOrderForm);
+=======
+      console.log(this.initOrderForm);
+>>>>>>> 38b9abafa9077b957d6a01c1eff8629a048421a5
 
       thisProduct.dom.form.addEventListener("submit", function (event) {
         event.preventDefault();
         thisProduct.processOrder();
+<<<<<<< HEAD
         //console.log("Form Event Lintener added");
+=======
+        console.log("Form Event Lintener added");
+>>>>>>> 38b9abafa9077b957d6a01c1eff8629a048421a5
       });
 
       for (let input of thisProduct.dom.formInputs) {
         input.addEventListener("change", function () {
           thisProduct.processOrder();
+<<<<<<< HEAD
           //console.log("Process after change in form");
+=======
+          console.log("Process after change in form");
+>>>>>>> 38b9abafa9077b957d6a01c1eff8629a048421a5
         });
       }
 
       thisProduct.dom.cartButton.addEventListener("click", function (event) {
         event.preventDefault();
         thisProduct.processOrder();
+<<<<<<< HEAD
         // console.log("Process after click");
+=======
+        console.log("Process after click");
+>>>>>>> 38b9abafa9077b957d6a01c1eff8629a048421a5
       });
     }
     processOrder() {
