@@ -1,7 +1,6 @@
 import { select, classNames, templates } from "../settings.js";
 import { utils } from "../utils.js";
 import AmountWidget from "./AmountWidget.js";
-
 class Product {
   constructor(id, data) {
     const thisProduct = this;
@@ -158,7 +157,6 @@ class Product {
   }
   addToCart() {
     const thisProduct = this;
-
     // app.cart.add(thisProduct.prepareCartProduct());
 
     const event = new CustomEvent("add-to-cart", {
@@ -168,7 +166,7 @@ class Product {
       },
     });
 
-    thisProduct.element.dispatchEvent(event);
+    thisProduct.dom.element.dispatchEvent(event);
   }
 
   prepareCartProduct() {
@@ -199,9 +197,7 @@ class Product {
         }
       }
     }
-
     return optionsSummary;
   }
 }
-
 export default Product;

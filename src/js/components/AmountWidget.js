@@ -1,14 +1,17 @@
 import { select, settings } from "../settings.js";
-
 class AmountWidget {
   constructor(element) {
     const thisWidget = this;
     // console.log('AmountWidget:', thisWidget);
     // console.log('constructor arguments:', element);
+
     thisWidget.getElements(element);
-    thisWidget.setValue(settings.amountWidget.defaultValue);
+    thisWidget.setValue(
+      thisWidget.input.value || settings.amountWidget.defaultValue
+    );
     thisWidget.initActions();
   }
+
   getElements(element) {
     const thisWidget = this;
     thisWidget.element = element;
@@ -66,5 +69,4 @@ class AmountWidget {
     thisWidget.element.dispatchEvent(event);
   }
 }
-
 export default AmountWidget;

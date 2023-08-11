@@ -1,16 +1,9 @@
 import { settings, select, classNames } from "./settings.js";
 import Product from "./components/Product.js";
 import Cart from "./components/Cart.js";
-import Booking from "./components/Booking.js";
-
 const app = {
-  initBooking: function () {
-    const container = document.querySelector(select.containerOf.booking);
-    new Booking(container);
-  },
   initPages: function () {
     const thisApp = this;
-
     thisApp.pages = document.querySelector(select.containerOf.pages).children;
     thisApp.navLinks = document.querySelectorAll(select.nav.links);
     const idFromHash = window.location.hash.replace("#/", "");
@@ -81,6 +74,7 @@ const app = {
     const cartElem = document.querySelector(select.containerOf.cart);
     thisApp.cart = new Cart(cartElem);
     thisApp.productList = document.querySelector(select.containerOf.menu);
+
     thisApp.productList.addEventListener("add-to-cart", function (event) {
       app.cart.add(event.detail.product.prepareCartProduct());
     });
@@ -93,11 +87,8 @@ const app = {
     // console.log('settings:', settings);
     // console.log('templates:', templates);
     thisApp.initPages();
-
     thisApp.initData();
     thisApp.initCart();
-    thisApp.initBooking();
   },
 };
-
 app.init();
