@@ -3,30 +3,36 @@ import AmountWidget from "./AmountWidget.js";
 
 class Booking {
   constructor(element) {
-    this.element = element;
+    const thisBooking = this;
 
-    this.render(this.element);
-    this.initWidgets();
+    thisBooking.render(element);
+
+    thisBooking.render(element);
+    thisBooking.initWidgets();
   }
 
   render(element) {
+    const thisBooking = this;
+
     const generatedHTML = templates.bookingWidget();
+    thisBooking.dom = {};
+    thisBooking.dom.wrapper = element;
+    thisBooking.dom.wrapper.innerHTML = generatedHTML;
 
-    this.dom = {};
-    this.dom.wrapper = element;
-    this.dom.wrapper.innerHTML = generatedHTML;
-
-    this.dom.peopleAmount = this.dom.wrapper.querySelector(
+    thisBooking.dom.peopleAmount = thisBooking.dom.wrapper.querySelector(
       select.booking.peopleAmount
     );
-    this.dom.hoursAmount = this.dom.wrapper.querySelector(
+    thisBooking.dom.hoursAmount = thisBooking.dom.wrapper.querySelector(
       select.booking.hoursAmount
     );
   }
 
   initWidgets() {
-    new AmountWidget(this.dom.peopleAmount);
-    new AmountWidget(this.dom.hoursAmount);
+    const thisBooking = this;
+    thisBooking.peopleAmount = new AmountWidget(thisBooking.dom.peopleAmount);
+    thisBooking.dom.peopleAmount.addEventListener("click", function () {});
+    thisBooking.hoursAmount = new AmountWidget(thisBooking.dom.hoursAmount);
+    thisBooking.dom.hoursAmount.addEventListener("click", function () {});
   }
 }
 
