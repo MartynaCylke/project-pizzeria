@@ -5,9 +5,11 @@ import HourPicker from "./HourPicker.js";
 
 class Booking {
   constructor(element) {
+
     this.element = element;
     this.render(this.element);
     this.initWidgets();
+
   }
   render(element) {
     const generatedHTML = templates.bookingWidget();
@@ -15,10 +17,11 @@ class Booking {
     this.dom.wrapper = element;
     this.dom.wrapper.innerHTML = generatedHTML;
 
-    this.dom.peopleAmount = this.dom.wrapper.querySelector(
+
+    thisBooking.dom.peopleAmount = thisBooking.dom.wrapper.querySelector(
       select.booking.peopleAmount
     );
-    this.dom.hoursAmount = this.dom.wrapper.querySelector(
+    thisBooking.dom.hoursAmount = thisBooking.dom.wrapper.querySelector(
       select.booking.hoursAmount
     );
     this.dom.datePicker = this.dom.wrapper.querySelector(
@@ -34,6 +37,7 @@ class Booking {
     new AmountWidget(this.dom.hoursAmount);
     new DatePicker(this.dom.datePicker);
     new HourPicker(this.dom.hourPicker);
+
   }
 }
 
