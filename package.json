@@ -11,7 +11,11 @@
     "init:gitignore:custom": "echo \"dist\" >> .gitignore",
     "test": "npm-run-all test:*",
     "test:html": "html-validate src/*.html",
+<<<<<<< HEAD
+    "test:js": "eslint js/",
+=======
     "test:js": "eslint --fix src/js/",
+>>>>>>> Ajax/api
     "test:scss": "stylelint --fix src/sass/",
     "build": "npm-run-all build:* test",
     "build:clean": "rimraf dist && mkdirp dist",
@@ -20,9 +24,14 @@
     "build:autoprefixer": "postcss dist/css/*.css --use autoprefixer -d dist/css",
     "build-dev": "npm-run-all build-dev:sass build:autoprefixer",
     "build-dev:sass": "sass --style=expanded --source-map src/sass:dist/css",
+<<<<<<< HEAD
+    "watch": "npm-run-all build-dev -p watch:*",
+    "watch:browsersync": "browser-sync start --server dist --files \"dist/**/*\"",
+=======
     "server": "json-server --port 3131 --no-cors --delay 250 --watch dist/db/app.json",
     "watch": "npm-run-all build-dev -p watch:* server",
     "watch:browsersync": "browser-sync start --server dist --files \"dist/**/*\" --ignore \"dist/db/**/*\"",
+>>>>>>> Ajax/api
     "watch:sassprefixer": "onchange \"src/sass/**/*.scss\" -- npm run build-dev",
     "watch:copy": "onchange -e \"**/sass/**/*\" -e \"**/.gitkeep\" \"src/**/*\" -- copyfiles -a -u 1 {{changed}} dist"
   },
@@ -31,10 +40,16 @@
   "license": "ISC",
   "devDependencies": {
     "autoprefixer": "^10.2.4",
+<<<<<<< HEAD
+    "browser-sync": "^2.26.3",
+    "copyfiles": "^2.1.0",
+    "eslint": "^5.16.0",
+=======
     "babel-eslint": "^10.1.0",
     "browser-sync": "^2.26.3",
     "copyfiles": "^2.1.0",
     "eslint": "^5.14.1",
+>>>>>>> Ajax/api
     "globstar": "^1.0.0",
     "html-validate": "^7.3.2",
     "mkdirp": "^0.5.1",
@@ -48,8 +63,11 @@
     "stylelint": "^14.11.0",
     "stylelint-config-standard-scss": "^5.0.0",
     "stylelint-scss": "^4.3.0"
+<<<<<<< HEAD
+=======
   },
   "dependencies": {
     "json-server": "^0.17.3"
+>>>>>>> Ajax/api
   }
 }
