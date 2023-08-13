@@ -203,7 +203,7 @@ class Product {
       },
     });
 
-    thisProduct.element.dispatchEvent(event);
+    thisProduct.dom.element.dispatchEvent(event);
   }
 
   prepareCartProduct() {
