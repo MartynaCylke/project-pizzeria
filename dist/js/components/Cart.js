@@ -5,13 +5,18 @@ import CartProduct from "./CartProduct.js";
 class Cart {
   constructor(element) {
     const thisCart = this;
+
     thisCart.products = [];
+
     thisCart.getElements(element);
     thisCart.initActions();
   }
+
   getElements(element) {
     const thisCart = this;
+
     thisCart.dom = {};
+
     thisCart.dom.wrapper = element;
     thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(
       select.cart.toggleTrigger
@@ -37,44 +42,58 @@ class Cart {
     );
     thisCart.dom.phone = thisCart.dom.wrapper.querySelector(select.cart.phone);
   }
+
   initActions() {
     const thisCart = this;
+
     thisCart.dom.toggleTrigger.addEventListener("click", function () {
       thisCart.dom.wrapper.classList.toggle(classNames.cart.wrapperActive);
     });
+
     thisCart.dom.productList.addEventListener("updated", function () {
       thisCart.update();
     });
+
     thisCart.dom.productList.addEventListener("remove", function (event) {
       thisCart.remove(event.detail.cartProduct);
     });
+
     thisCart.dom.form.addEventListener("submit", function (event) {
       event.preventDefault();
       thisCart.sendOrder();
     });
   }
+
   add(menuProduct) {
     const thisCart = this;
+
     const generatedHTML = templates.cartProduct(menuProduct);
     const generatedDOM = utils.createDOMFromHTML(generatedHTML);
+
     thisCart.dom.productList.appendChild(generatedDOM);
     thisCart.products.push(new CartProduct(menuProduct, generatedDOM));
+
     thisCart.update();
   }
+
   update() {
     const thisCart = this;
+
     const deliveryFee = settings.cart.defaultDeliveryFee;
     let totalNumber = 0;
     let subtotalPrice = 0;
+
     for (let product of thisCart.products) {
       totalNumber += product.amount;
       subtotalPrice += product.price;
     }
+
     if (thisCart.products.length !== 0) {
       thisCart.totalPrice = subtotalPrice + deliveryFee;
     } else {
       thisCart.totalPrice = 0;
     }
+
     thisCart.dom.deliveryFee.innerHTML = deliveryFee;
     thisCart.dom.subtotalPrice.innerHTML = subtotalPrice;
     for (let totalPrice of thisCart.dom.totalPrice) {
@@ -82,16 +101,21 @@ class Cart {
     }
     thisCart.dom.totalNumber.innerHTML = totalNumber;
   }
+
   remove(productToRemove) {
     const thisCart = this;
+
     productToRemove.dom.wrapper.innerHTML = "";
     const indexOfProducts = thisCart.products.indexOf(productToRemove);
     thisCart.products.splice(indexOfProducts, 1);
     thisCart.update();
   }
+
   sendOrder() {
     const thisCart = this;
+
     const url = settings.db.url + "/" + settings.db.orders;
+
     const payload = {};
     payload.address = thisCart.dom.address.value;
     payload.phone = thisCart.dom.phone.value;
@@ -103,6 +127,7 @@ class Cart {
     for (let prod of thisCart.products) {
       payload.products.push(prod.getData());
     }
+
     const options = {
       method: "POST",
       headers: {
