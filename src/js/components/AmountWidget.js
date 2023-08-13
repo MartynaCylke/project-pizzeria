@@ -4,10 +4,13 @@ import BaseWidget from "./BaseWidget.js";
 class AmountWidget extends BaseWidget {
   constructor(element) {
     super(element, settings.amountWidget.defaultValue);
+
     const thisWidget = this;
 
     thisWidget.getElements(element);
-    thisWidget.setValue(thisWidget.dom.input.value);
+    thisWidget.setValue(
+      thisWidget.dom.input.value || settings.amountWidget.defaultValue
+    );
     thisWidget.initActions();
   }
 
