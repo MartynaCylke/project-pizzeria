@@ -9,11 +9,13 @@ class Booking {
     this.element = element;
     this.selectedTable = 0;
     this.starters = [];
+
     this.render(this.element);
     this.initWidgets();
     this.getData();
     this.initActions();
   }
+
   getData() {
     const startDateParam =
       settings.db.dateStartParamKey +
@@ -73,9 +75,9 @@ class Booking {
         ]);
       })
       .then(function ([bookings, eventsCurrent, eventsRepeat]) {
-        console.log(bookings);
-        console.log(eventsCurrent);
-        console.log(eventsRepeat);
+        // console.log(bookings);
+        // console.log(eventsCurrent);
+        // console.log(eventsRepeat);
         thisBooking.parseData(bookings, eventsCurrent, eventsRepeat);
       });
   }
@@ -136,6 +138,8 @@ class Booking {
 
       this.booked[date][hourBlock].push(table);
     }
+
+    console.log(this.booked[date]);
   }
 
   updateDOM() {
@@ -161,11 +165,13 @@ class Booking {
         !allAvailable &&
         this.booked[this.date][this.hour].includes(tableId)
       ) {
+        console.log(table);
         table.classList.add(classNames.booking.tableBooked);
       } else {
         table.classList.remove(classNames.booking.tableBooked);
       }
     }
+
     for (let table of this.dom.tables) {
       table.classList.remove(classNames.booking.tableClicked);
     }
@@ -173,6 +179,7 @@ class Booking {
 
   render(element) {
     const generatedHTML = templates.bookingWidget();
+
     this.dom = {};
     this.dom.wrapper = element;
     this.dom.wrapper.innerHTML = generatedHTML;
@@ -189,10 +196,12 @@ class Booking {
     this.dom.hourPicker = this.dom.wrapper.querySelector(
       select.widgets.hourPicker.wrapper
     );
+
     this.dom.tables = this.dom.wrapper.querySelectorAll(select.booking.tables);
     this.dom.floorPlan = this.dom.wrapper.querySelector(
       select.booking.floorPlan
     );
+
     this.dom.formSubmit = this.dom.wrapper.querySelector(
       select.booking.formSubmit
     );
@@ -208,10 +217,10 @@ class Booking {
     this.hoursAmount = new AmountWidget(this.dom.hoursAmount);
     this.datePicker = new DatePicker(this.dom.datePicker);
     this.hourPicker = new HourPicker(this.dom.hourPicker);
+
     const thisBooking = this;
 
     this.dom.wrapper.addEventListener("updated", function () {
-      this.updateDOM();
       thisBooking.updateDOM();
     });
   }
