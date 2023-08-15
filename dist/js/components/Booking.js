@@ -1,4 +1,4 @@
-import { templates, select, settings, classNames } from "./../settings.js";
+import { select, templates, settings, classNames } from "../settings.js";
 import { utils } from "../utils.js";
 import AmountWidget from "./AmountWidget.js";
 import DatePicker from "./DatePicker.js";

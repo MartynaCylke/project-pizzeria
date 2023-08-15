@@ -75,6 +75,7 @@ export const select = {
   },
   // CODE ADDED END
 };
+
 export const classNames = {
   menuProduct: {
     wrapperActive: "active",
@@ -97,6 +98,7 @@ export const classNames = {
     active: "active",
   },
 };
+
 export const settings = {
   amountWidget: {
     defaultValue: 1,
@@ -119,7 +121,10 @@ export const settings = {
     tableIdAttribute: "data-table",
   },
   db: {
-    url: "//localhost:3131",
+    url:
+      "//" +
+      window.location.hostname +
+      (window.location.hostname == "localhost" ? ":3131" : ""),
     products: "products",
     orders: "orders",
     booking: "bookings",
@@ -130,6 +135,7 @@ export const settings = {
     repeatParam: "repeat_ne=false",
   },
 };
+
 export const templates = {
   menuProduct: Handlebars.compile(
     document.querySelector(select.templateOf.menuProduct).innerHTML
