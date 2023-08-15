@@ -9,6 +9,7 @@ class Booking {
     this.element = element;
     this.selectedTable = 0;
     this.starters = [];
+
     this.render(this.element);
     this.initWidgets();
     this.getData();
@@ -24,12 +25,15 @@ class Booking {
       settings.db.dateEndParamKey +
       "=" +
       utils.dateToStr(this.datePicker.maxDate);
+
     const params = {
       booking: [startDateParam, endDateParam],
       eventsCurrent: [settings.db.notRepeatParam, startDateParam, endDateParam],
       eventsRepeat: [settings.db.repeatParam, endDateParam],
     };
+
     // console.log('getData params', params);
+
     const urls = {
       booking:
         settings.db.url +
@@ -52,7 +56,9 @@ class Booking {
     };
 
     // console.log('getData urls', urls);
+
     const thisBooking = this;
+
     Promise.all([
       fetch(urls.booking),
       fetch(urls.eventsCurrent),
@@ -75,16 +81,21 @@ class Booking {
         thisBooking.parseData(bookings, eventsCurrent, eventsRepeat);
       });
   }
+
   parseData(bookings, eventsCurrent, eventsRepeat) {
     this.booked = {};
+
     for (let item of bookings) {
       this.makeBooked(item.date, item.hour, item.duration, item.table);
     }
+
     for (let item of eventsCurrent) {
       this.makeBooked(item.date, item.hour, item.duration, item.table);
     }
+
     const minDate = this.datePicker.minDate;
     const maxDate = this.datePicker.maxDate;
+
     for (let item of eventsRepeat) {
       if (item.repeat == "daily") {
         for (
@@ -101,41 +112,55 @@ class Booking {
         }
       }
     }
+
     // console.log('this.booked', this.booked);
+
     this.updateDOM();
   }
+
   makeBooked(date, hour, duration, table) {
     if (typeof this.booked[date] == "undefined") {
       this.booked[date] = {};
     }
+
     const startHour = utils.hourToNumber(hour);
+
     for (
       let hourBlock = startHour;
       hourBlock < startHour + duration;
       hourBlock += 0.5
     ) {
       // console.log('loop', hourBlock);
+
       if (typeof this.booked[date][hourBlock] == "undefined") {
         this.booked[date][hourBlock] = [];
       }
+
       this.booked[date][hourBlock].push(table);
     }
+
+    console.log(this.booked[date]);
   }
+
   updateDOM() {
     this.date = this.datePicker.value;
     this.hour = utils.hourToNumber(this.hourPicker.value);
+
     let allAvailable = false;
+
     if (
       typeof this.booked[this.date] == "undefined" ||
       typeof this.booked[this.date][this.hour] == "undefined"
     ) {
       allAvailable = true;
     }
+
     for (let table of this.dom.tables) {
       let tableId = table.getAttribute(settings.booking.tableIdAttribute);
       if (!isNaN(tableId)) {
         tableId = parseInt(tableId);
       }
+
       if (
         !allAvailable &&
         this.booked[this.date][this.hour].includes(tableId)
@@ -146,15 +171,19 @@ class Booking {
         table.classList.remove(classNames.booking.tableBooked);
       }
     }
+
     for (let table of this.dom.tables) {
       table.classList.remove(classNames.booking.tableClicked);
     }
   }
+
   render(element) {
     const generatedHTML = templates.bookingWidget();
+
     this.dom = {};
     this.dom.wrapper = element;
     this.dom.wrapper.innerHTML = generatedHTML;
+
     this.dom.peopleAmount = this.dom.wrapper.querySelector(
       select.booking.peopleAmount
     );
@@ -190,19 +219,22 @@ class Booking {
     this.hourPicker = new HourPicker(this.dom.hourPicker);
 
     const thisBooking = this;
+
     this.dom.wrapper.addEventListener("updated", function () {
       thisBooking.updateDOM();
     });
   }
+
   initActions() {
     const thisBooking = this;
 
-    this.Booking.addEventListener("click", function (event) {
+    this.dom.floorPlan.addEventListener("click", function (event) {
       event.preventDefault();
       const clickedElem = event.target;
       const selectedTable = document.querySelector(
         select.booking.selectedTable
       );
+
       if (!clickedElem.classList.contains(select.booking.tableBooked)) {
         clickedElem.classList.toggle(classNames.booking.tableClicked);
         if (selectedTable !== null && clickedElem !== selectedTable) {
