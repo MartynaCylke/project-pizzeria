@@ -197,7 +197,7 @@ class Booking {
   initActions() {
     const thisBooking = this;
 
-    this.dom.floorPlan.addEventListener("click", function (event) {
+    this.Booking.addEventListener("click", function (event) {
       event.preventDefault();
       const clickedElem = event.target;
       const selectedTable = document.querySelector(
