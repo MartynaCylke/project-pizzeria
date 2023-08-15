@@ -45,6 +45,10 @@ export const select = {
     tables: ".floor-plan .table",
     floorPlan: ".floor-plan",
     selectedTable: ".floor-plan .table.clicked",
+    formSubmit: '.booking-form [type="submit"]',
+    phone: '.booking-form [name="phone"]',
+    address: '.booking-form [name="address"]',
+    checkboxes: ".booking-form .checkboxes",
   },
   nav: {
     links: ".main-nav a",
@@ -93,7 +97,6 @@ export const classNames = {
     active: "active",
   },
 };
-
 export const settings = {
   amountWidget: {
     defaultValue: 1,
@@ -127,7 +130,6 @@ export const settings = {
     repeatParam: "repeat_ne=false",
   },
 };
-
 export const templates = {
   menuProduct: Handlebars.compile(
     document.querySelector(select.templateOf.menuProduct).innerHTML
