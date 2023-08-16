@@ -188,10 +188,8 @@
         opacity: 0.4;
       }
     }
-    &.selected {
-      cursor: not-allowed;
-      color: lighten($color-dark, 40%);
 
+    &.clicked {
       &::after {
         position: absolute;
         content: "";
@@ -199,8 +197,7 @@
         height: 100%;
         left: 0;
         top: 0;
-        background: red;
-        border: 5px, solid, purple;
+        background: $color-success;
         opacity: 0.4;
       }
     }

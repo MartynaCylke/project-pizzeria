@@ -243,9 +243,16 @@ class Booking {
         thisBooking.selectedTable = clickedElem.getAttribute(
           settings.booking.tableIdAttribute
         );
+        const isTableBooked = clickedElem.classList.contains(
+          classNames.booking.tableBooked
+        );
+
+        if (isTableBooked) {
+          return alert("Ten stolik jest juz zarezerwowany");
+        }
       }
     });
-    this.dom.formSubmit.addEventListener("click", function (event) {
+    this.dom.formSubmit.addEventListener("submit", function (event) {
       event.preventDefault();
       thisBooking.sendBooking();
     });
