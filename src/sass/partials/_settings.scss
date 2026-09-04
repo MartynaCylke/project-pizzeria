@@ -1,3 +1,5 @@
+@use "sass:color";
+
 /* Variables */
 
 $color-warning: #f6b93b;
@@ -31,13 +33,13 @@ $base-size: 12px;
   text-transform: uppercase;
   text-align: center;
   &:hover {
-    background: lighten($btn-bg, 3%);
+    background: color.adjust($btn-bg, $lightness: 3%);
   }
   // CODE ADDED START
   &.disabled,
   &[disabled] {
-    background: desaturate($btn-bg, 100%);
-    border-color: desaturate($btn-border, 100%);
+    background: color.adjust($btn-bg, $saturation: -100%);
+    border-color: color.adjust($btn-border, $saturation: -100%);
     cursor: not-allowed;
   }
   // CODE ADDED END

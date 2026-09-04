@@ -1,12 +1,17 @@
+@use "sass:color";
+@use "sass:math";
+@use "settings" as *;
+@use "typography";
+
 .product-list {
   padding: ($base-size * 3) 0;
 }
 
 .product {
-  margin: ($base-size / 2) 0;
+  margin: math.div($base-size, 2) 0;
   padding: ($base-size * 6) ($base-size * 4);
   background: $color-light;
-  border-bottom: 1px solid lighten($color-dark, 70%);
+  border-bottom: 1px solid color.adjust($color-dark, $lightness: 70%);
   border-radius: $radius;
 
   &__header {
@@ -35,7 +40,7 @@
   }
 
   &__description {
-    color: lighten($color-dark, 10%);
+    color: color.adjust($color-dark, $lightness: 10%);
   }
 
   &__wrapper {
@@ -112,7 +117,7 @@
     width: 30px;
     height: 30px;
     text-align: center;
-    margin: 0 ($base-size / 2);
+    margin: 0 math.div($base-size, 2);
     padding: 0;
   }
 }
