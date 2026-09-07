@@ -1,3 +1,7 @@
+@use "sass:color";
+@use "settings" as *;
+@use "typography";
+
 .header {
   padding: ($base-size * 5) 0 ($base-size * 8) 0;
   background: $color-dark;
@@ -47,12 +51,12 @@
     margin-right: ($base-size * 2);
     text-align: center;
     padding: $base-size ($base-size * 2);
-    background: darken($color-dark, 5%);
+    background: color.adjust($color-dark, $lightness: -5%);
     border-top-left-radius: $radius;
     border-top-right-radius: $radius;
 
     &.active {
-      background: lighten($color-dark, 75%);
+      background: color.adjust($color-dark, $lightness: 75%);
     }
 
   }

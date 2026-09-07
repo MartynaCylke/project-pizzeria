@@ -17,6 +17,20 @@ class Booking {
   }
 
   getData() {
+    if (settings.db.isDemo) {
+      fetch(settings.db.dataUrl)
+        .then((response) => response.json())
+        .then((data) => {
+          const events = data.events || [];
+          this.parseData(
+            data.bookings || [],
+            events.filter((event) => !event.repeat),
+            events.filter((event) => event.repeat)
+          );
+        });
+      return;
+    }
+
     const startDateParam =
       settings.db.dateStartParamKey +
       "=" +
@@ -300,11 +314,13 @@ class Booking {
       body: JSON.stringify(payload),
     };
 
-    fetch(url, options)
-      .then((rawResponse) => rawResponse.json())
-      .then((parsedResponse) => {
-        console.log(parsedResponse);
-      });
+    if (!settings.db.isDemo) {
+      fetch(url, options)
+        .then((rawResponse) => rawResponse.json())
+        .then((parsedResponse) => {
+          console.log(parsedResponse);
+        });
+    }
 
     this.makeBooked(
       this.datePicker.value,

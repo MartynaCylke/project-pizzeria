@@ -1,3 +1,6 @@
+@use "sass:color";
+@use "settings" as *;
+
 *,
 *::before,
 *::after {
@@ -6,7 +9,7 @@
 
 body {
   margin: 0;
-  background: lighten($color-dark, 75%);
+  background: color.adjust($color-dark, $lightness: 75%);
   font-family: $font-text;
   font-size: 14px;
   line-height: 1.7;

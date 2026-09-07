@@ -74,7 +74,9 @@ const app = {
   initData: function () {
     const thisApp = this;
 
-    const url = settings.db.url + "/" + settings.db.products;
+    const url = settings.db.isDemo
+      ? settings.db.dataUrl
+      : settings.db.url + "/" + settings.db.products;
 
     thisApp.data = {};
 
@@ -86,7 +88,9 @@ const app = {
         // console.log('parsedResponse', parsedResponse);
 
         /* save parsedResponse as thisapp.data.products */
-        thisApp.data.products = parsedResponse;
+        thisApp.data.products = settings.db.isDemo
+          ? parsedResponse.products
+          : parsedResponse;
 
         /* execute initMenu method */
         thisApp.initMenu();

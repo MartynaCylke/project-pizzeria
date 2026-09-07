@@ -114,6 +114,8 @@ class Cart {
   sendOrder() {
     const thisCart = this;
 
+    if (settings.db.isDemo) return;
+
     const url = settings.db.url + "/" + settings.db.orders;
 
     const payload = {};

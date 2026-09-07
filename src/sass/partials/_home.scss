@@ -1,3 +1,6 @@
+@use "settings" as *;
+@use "typography";
+
 #home .container {
   background-color: $color-light;
   margin-top: 40px;

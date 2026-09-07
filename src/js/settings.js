@@ -121,6 +121,8 @@ export const settings = {
     tableIdAttribute: "data-table",
   },
   db: {
+    isDemo: !["localhost", "127.0.0.1"].includes(window.location.hostname),
+    dataUrl: new URL("db/app.json", document.baseURI).href,
     url:
       "//" +
       window.location.hostname +
